@@ -1,6 +1,11 @@
 const app = require("./app");
-const PORT=3000;
 
-app.listen(PORT,()=>{
-    console.log(`Server Listion on Port ${PORT}`);
+//import dotenv
+const dotenv=require("dotenv");
+
+//use dotenv
+dotenv.config({path:'./config.env'});
+
+app.listen(process.env.RUNNING_PORT,()=>{
+    console.log(`Server Listion on Port ${process.env.RUNNING_PORT}`);
 })
