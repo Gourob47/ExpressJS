@@ -1,48 +1,39 @@
 const express=require('express');
-const { createBlog, readBlog, updateBlog, deleteBlog } = require('../Controllers/blogController');
-const { createComment, readComment, updateComment, deleteComment } = require('../Controllers/commentController');
-const { createMessage, readMessage, updateMessage, deleteMessage } = require('../Controllers/messageController');
-const { createPortfolio, readPortfolio, updatePortfolio, deletePortfolio } = require('../Controllers/portfolioController');
-const { createProduct, readProduct, updateProduct, deleteProduct } = require('../Controllers/productController');
-
+const { createUser, updateUser, deleteUser, readUser } = require('../Controllers/userController');
+const { createPost, readPost, updatePost, deletePost } = require('../Controllers/postController');
+const { createAdmin, readAdmin, updateAdmin, deleteAdmin } = require('../Controllers/adminController');
+const { createSubAdmin, readSubAdmin, updateSubAdmin, deleteSubAdmin } = require('../Controllers/subAdminController');
 
 
 const router=express.Router();
 
-// Blog API
-router.get('/create/blog',createBlog);
-router.get('/read/blog',readBlog);
-router.get('/update/blog',updateBlog);
-router.get('/delete/blog',deleteBlog);
+// User API
+router.get('/create/user',createUser);
+router.get('/read/user',readUser);
+router.get('/update/user',updateUser);
+router.get('/delete/user',deleteUser);
 
 
 
-// Comment API
-router.get('/create/comment',createComment);
-router.get('/read/comment',readComment);
-router.get('/update/comment',updateComment);
-router.get('/delete/comment',deleteComment);
+// Post API
+router.get('/create/post',createPost);
+router.get('/read/post',readPost);
+router.get('/update/post',updatePost);
+router.get('/delete/post',deletePost);
 
 
-// Message API
-router.get('/create/message',createMessage);
-router.get('/read/message',readMessage);
-router.get('/update/message',updateMessage);
-router.get('/delete/message',deleteMessage);
+// Admin API
+router.get('/create/admin',createAdmin);
+router.get('/read/admin',readAdmin);
+router.get('/update/admin',updateAdmin);
+router.get('/delete/admin',deleteAdmin);
 
 
-// Portfolio API
-router.get('/create/portfolio',createPortfolio);
-router.get('/read/portfolio',readPortfolio);
-router.get('/update/portfolio',updatePortfolio);
-router.get('/delete/portfolio',deletePortfolio);
-
-
-// Product API
-router.get('/create/product',createProduct);
-router.get('/read/product',readProduct);
-router.get('/update/product',updateProduct);
-router.get('/delete/product',deleteProduct);
+// SubAdmin API
+router.get('/create/subadmin',createSubAdmin);
+router.get('/read/subadmin',readSubAdmin);
+router.get('/update/subadmin',updateSubAdmin);
+router.get('/delete/subadmin',deleteSubAdmin);
 
 
 module.exports=router;
