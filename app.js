@@ -18,32 +18,30 @@ const validator=require('validator');
 const xss=require('xss');
 
 
-//middleware used
-const limiter = rateLimit({
-	windowMs: 15 * 60 * 1000, 
-	max: 100, 
-	standardHeaders: 'draft-7',
-	legacyHeaders: false,
-})
 
 
-app.use(cookieParser());
-app.use(bodyParser.json());
-app.use(helmet());
-app.use(limiter);
-app.use(hpp());
-app.use(cors());
-app.use(mongoSanitize());
-app.use(express.json());
+// Security Middleware Implement
+app.use(cors())
+app.use(helmet())
+app.use(mongoSanitize())
+app.use(hpp())
+
+
+app.use(express.json({limit: '50mb'}));
+app.use(express.urlencoded({limit: '50mb'}));
 
 
 
-//Database Connection
+const limiter=rateLimit({windowMs:15*60*1000,max:3000})
+app.use(limiter)
+
+
+// Mongo DB Database Connection
 mongoose.connect('mongodb://127.0.0.1:27017/Test').then(() => console.log('Database Connected!')).catch(err=>console.log(err))
 
 
 
-//Defined Routes with version
+
 app.use('/api/v1',router);
 
 

@@ -1,39 +1,26 @@
 const express=require('express');
-const { createUser, updateUser, deleteUser, readUser } = require('../Controllers/userController');
-const { createPost, readPost, updatePost, deletePost } = require('../Controllers/postController');
-const { createAdmin, readAdmin, updateAdmin, deleteAdmin } = require('../Controllers/adminController');
-const { createSubAdmin, readSubAdmin, updateSubAdmin, deleteSubAdmin } = require('../Controllers/subAdminController');
+
+const { createStudent, loginStudent, updateProfile, readProfile, RecoverVerifyEmail, RecoverVerifyOTP, RecoverResetPass } = require('../Controllers/studentController');
+const { createWork, readWork, updateWork, deleteWork } = require('../Controllers/workController');
+const authVerifyMiddleware = require('../Middleware/authVerifyMiddleware');
 
 
 const router=express.Router();
 
-// User API
-router.get('/create/user',createUser);
-router.get('/read/user',readUser);
-router.get('/update/user',updateUser);
-router.get('/delete/user',deleteUser);
 
+router.post('/create/student',createStudent);
+router.post('/login/student',loginStudent);
 
+router.post('/update/student',authVerifyMiddleware,updateProfile);
+router.get('/read/student',authVerifyMiddleware,readProfile);
 
-// Post API
-router.get('/create/post',createPost);
-router.get('/read/post',readPost);
-router.get('/update/post',updatePost);
-router.get('/delete/post',deletePost);
+router.get('/recovery/verifyEmail/:email',authVerifyMiddleware,RecoverVerifyEmail);
+router.get('/recovery/verifyOtp/:email/:code',authVerifyMiddleware,RecoverVerifyOTP);
+router.post("/recoverResetPass",authVerifyMiddleware, RecoverResetPass);
 
-
-// Admin API
-router.get('/create/admin',createAdmin);
-router.get('/read/admin',readAdmin);
-router.get('/update/admin',updateAdmin);
-router.get('/delete/admin',deleteAdmin);
-
-
-// SubAdmin API
-router.get('/create/subadmin',createSubAdmin);
-router.get('/read/subadmin',readSubAdmin);
-router.get('/update/subadmin',updateSubAdmin);
-router.get('/delete/subadmin',deleteSubAdmin);
-
+router.post('/create/work',authVerifyMiddleware,createWork);
+router.get('/read/work',authVerifyMiddleware,readWork);
+router.post('/update/work/:id',authVerifyMiddleware,updateWork);
+router.post('/delete/work/:id',authVerifyMiddleware,deleteWork);
 
 module.exports=router;
