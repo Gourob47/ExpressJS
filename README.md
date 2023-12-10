@@ -1,2 +1,2 @@
 # ExpressJS
-Standard MERN Stack folder Structure. 
+Standard MERN Stack Backend System.
